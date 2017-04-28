@@ -6,22 +6,22 @@ import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FlatSpec, Matchers}
 
 @RunWith(classOf[JUnitRunner])
-class RunwaySpec extends FlatSpec with Matchers with ScalaFutures with TestDataSpec {
+class RunwaySpec extends FlatSpec with Matchers with ScalaFutures with TestUtility {
 
   "runway service" should "return no of records in file" in {
-    runwaysDefaultOps.runways.length shouldBe 5
+    runwaysDefaultOps.runways.length shouldBe 2
   }
 
   "getRunways function" should "return no of runways in airport" in {
     val airport = new Airport("6524","00AK","small_airport","Lowell Field","59.94919968","-151.695999146","450","NA","US","US-AK","Anchor Point","no","00AK","","00AK","","","")
     whenReady(runwaysDefaultOps.getRunways(airport)) {
       result =>
-        result.length shouldBe 4
+        result.length shouldBe 1
     }
   }
 
   "frequentRunways function" should "return runway identifications" in {
-    val expectedResult = List(("H1",3),("N",1),("06",1))
+    val expectedResult = List(("H1",1), ("N",1))
     whenReady(runwaysDefaultOps.frequentRunways) {
       result =>
         result shouldBe expectedResult

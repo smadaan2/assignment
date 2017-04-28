@@ -6,7 +6,7 @@ import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FlatSpec, Matchers}
 
 @RunWith(classOf[JUnitRunner])
-class AirportSpec extends FlatSpec with Matchers with ScalaFutures with TestDataSpec {
+class AirportSpec extends FlatSpec with Matchers with ScalaFutures with TestUtility {
 
   "airport service" should "return no of records in file" in {
     airportDefaultOps.airports.length shouldBe 4
@@ -24,7 +24,7 @@ class AirportSpec extends FlatSpec with Matchers with ScalaFutures with TestData
     val airport = new Airport("6524","00AK","small_airport","Lowell Field","59.94919968","-151.695999146","450","NA","US","US-AK","Anchor Point","no","00AK","","00AK","","","")
     whenReady(airportDefaultOps.getRunways(airport)) {
       result =>
-        result.length shouldBe 4
+        result.length shouldBe 1
     }
   }
 
@@ -32,7 +32,7 @@ class AirportSpec extends FlatSpec with Matchers with ScalaFutures with TestData
     val airport = new Airport("6524","00AK","small_airport","Lowell Field","59.94919968","-151.695999146","450","NA","US","US-AK","Anchor Point","no","00AK","","00AK","","","")
     whenReady(airportDefaultOps.getTypeOfRunways(airport)) {
       result =>
-        result.length shouldBe 4
+        result.length shouldBe 1
     }
   }
 
@@ -40,7 +40,7 @@ class AirportSpec extends FlatSpec with Matchers with ScalaFutures with TestData
     val airport = new Airport("6524","00AK","small_airport","Lowell Field","59.94919968","-151.695999146","450","NA","US","US-AK","Anchor Point","no","00AK","","00AK","","","")
     whenReady(airportDefaultOps.getTypeOfRunways(airport)) {
       result =>
-        result.length shouldBe 4
+        result.length shouldBe 1
     }
   }
 }

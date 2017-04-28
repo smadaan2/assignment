@@ -1,6 +1,9 @@
 package module
 
-trait TestDataSpec {
+/**
+  * Created by abdhesh on 28/04/17.
+  */
+trait TestUtility {
 
   class RunwayDefaultOpsMock extends RunwayDefaultOps {
     override lazy val fileName: String = "test/data/runway.csv"
@@ -15,9 +18,6 @@ trait TestDataSpec {
   }
 
   lazy val runwaysDefaultOps = new RunwayDefaultOpsMock()
-
   lazy val airportDefaultOps = new AirportDefaultOpsMock(runwaysDefaultOps)
-
   lazy val countryDefaultOps = new CountryDefaultOpsMock(airportDefaultOps)
-
 }

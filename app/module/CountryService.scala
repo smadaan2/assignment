@@ -28,6 +28,12 @@ class CountryDefaultOps(airportService: AirportDefaultOps) extends CountryOps {
   override lazy val countries: Vector[Country] = new CsvReader(fileName)
     .readAndParse((line, headers) => Country(line, headers))
 
+  /**
+    * get type of runways in country
+    * @param country : Country
+    * @return : Future[String]
+    */
+
   def getTypeOfRunways(country: Country): Future[String] = {
     val typeOfRunways = airportService.getAirports(country).flatMap { airports =>
       val runways = airports.take(500).map(f => airportService.getTypeOfRunways(f))
@@ -37,10 +43,18 @@ class CountryDefaultOps(airportService: AirportDefaultOps) extends CountryOps {
     typeOfRunways.map(_.toSet.filterNot(_.isEmpty).mkString(","))
   }
 
-
+  /**
+    * get total airports in country
+    * @param country : Country
+    * @return : Future[Int]
+    */
   def totalAirports(country: Country): Future[Int] =
     airportService.getAirports(country).map(_.length)
 
+  /**
+    * get type of runways in country
+    * @return : `Future[Vector[(String, String)]]`
+    */
   def typeOfRunways: Future[Vector[(String, String)]] = {
     Future {
       val runwayTypes = countries.map { country =>
@@ -50,6 +64,10 @@ class CountryDefaultOps(airportService: AirportDefaultOps) extends CountryOps {
     }.flatMap(f => f)
   }
 
+  /**
+    * get number of airports in country
+    * @return : Future[(List[CountryCount], List[CountryCount])]
+    */
   def countriesNumberOfAirports: Future[(List[CountryCount], List[CountryCount])] = {
     val result = countries.map {
       country =>
@@ -63,6 +81,11 @@ class CountryDefaultOps(airportService: AirportDefaultOps) extends CountryOps {
     }
   }
 
+  /**
+    * search country by code or country name
+    * @param codeOrCountry : String
+    * @return : `Future[Option[Country]]`
+    */
   def getByCodeOrCountry(codeOrCountry: String): Future[Option[Country]] = Future {
     val searchKeyword = codeOrCountry.toLowerCase
     countries.find {
@@ -72,6 +95,11 @@ class CountryDefaultOps(airportService: AirportDefaultOps) extends CountryOps {
     }
   }
 
+  /**
+    * search airports and runways by country code or name
+    * @param codeOrCountry : String
+    * @return : Future[QueryResult]
+    */
   def searchByCodeOrCountry(codeOrCountry: String): Future[QueryResult] = {
     getByCodeOrCountry(codeOrCountry.toLowerCase).flatMap {
       case Some(country) =>
