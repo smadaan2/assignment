@@ -1,8 +1,8 @@
-name := "airpot_problem"
+name := "airport_problem"
 
 version := "1.0"
 
-lazy val `airpot_problem` = (project in file(".")).enablePlugins(PlayScala)
+lazy val `airport_problem` = (project in file(".")).enablePlugins(PlayScala)
 
 scalaVersion := "2.11.7"
 

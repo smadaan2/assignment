@@ -6,7 +6,25 @@ import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FlatSpec, Matchers}
 
 @RunWith(classOf[JUnitRunner])
-class CountrySpec extends FlatSpec with Matchers with ScalaFutures with TestDataSpec {
+class CountrySpec extends FlatSpec with Matchers with ScalaFutures {
+
+  class RunwayDefaultOpsMock extends RunwayDefaultOps {
+    override lazy val fileName: String = "D:\\Projects\\assignment\\test\\data\\runway.csv"
+  }
+
+  class AirportDefaultOpsMock(runways: RunwayDefaultOpsMock) extends AirportDefaultOps(runways) {
+    override lazy val fileName: String = "D:\\Projects\\assignment\\test\\data\\airport.csv"
+  }
+
+  class CountryDefaultOpsMock(airportService: AirportDefaultOpsMock) extends CountryDefaultOps(airportService) {
+    override lazy val fileName: String = "D:\\Projects\\assignment\\test\\data\\country.csv"
+  }
+
+  lazy val runwaysDefaultOps = new RunwayDefaultOpsMock()
+
+  lazy val airportDefaultOps = new AirportDefaultOpsMock(runwaysDefaultOps)
+
+  lazy val countryDefaultOps = new CountryDefaultOpsMock(airportDefaultOps)
 
   "Country Service" should "return no of records in file" in {
     countryDefaultOps.countries.length shouldBe 4
