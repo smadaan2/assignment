@@ -1,0 +1,7 @@
+"id","airport_ref","airport_ident","length_ft","width_ft","surface","lighted","closed","le_ident","le_latitude_deg","le_longitude_deg","le_elevation_ft","le_heading_degT","le_displaced_threshold_ft","he_ident","he_latitude_deg","he_longitude_deg","he_elevation_ft","he_heading_degT","he_displaced_threshold_ft",
+269408,6523,"00A",80,80,"ASPH-G",1,0,"H1",,,,,,,,,,,
+255155,6524,"00AK",2500,70,"GRVL",0,0,"N",,,,,,"S",,,,,
+249606,6680,"02PR",2000,50,"TURF",0,0,"06",,,,,,"24",,,,,
+265781,10097,"34LL",40,40,"CONC",0,0,"H1",,,,,,,,,,,
+265782,10099,"34MA",16,20,"WOOD",0,0,"H1",,,,,,,,,,,
+
